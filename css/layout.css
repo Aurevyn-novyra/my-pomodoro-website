@@ -1,0 +1,195 @@
+/* =========================================================
+   Layout Styles
+   Structural layout, spacing, and responsive behavior
+   ========================================================= */
+
+/* -------------------------
+   App Container
+   ------------------------- */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  gap: var(--space-md);
+}
+
+/* -------------------------
+   Header
+   ------------------------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  z-index: var(--z-header);
+}
+
+.app-title {
+  font-size: 1.25rem;
+  letter-spacing: 0.3px;
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* -------------------------
+   Main Content
+   ------------------------- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* -------------------------
+   Timer Section
+   ------------------------- */
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-lg);
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.session-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--space-xxs);
+  border-radius: var(--radius-md);
+}
+
+.session-tab {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary);
+}
+
+.session-tab:hover {
+  color: var(--color-text-primary);
+}
+
+/* -------------------------
+   Timer Display
+   ------------------------- */
+.timer-display {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-text {
+  position: absolute;
+  font-size: 2.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--color-text-primary);
+}
+
+/* -------------------------
+   Timer Controls
+   ------------------------- */
+.timer-controls {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* -------------------------
+   Stats Section
+   ------------------------- */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* -------------------------
+   Settings Panel
+   ------------------------- */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(360px, 100%);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  z-index: var(--z-overlay);
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+.setting-group.inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* -------------------------
+   Footer
+   ------------------------- */
+.app-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  padding-bottom: var(--space-xs);
+}
+
+/* -------------------------
+   Responsive Enhancements
+   ------------------------- */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .time-text {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    max-width: 720px;
+  }
+}
