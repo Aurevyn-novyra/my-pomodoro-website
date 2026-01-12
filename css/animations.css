@@ -1,0 +1,158 @@
+/* =========================================================
+   Animations & Micro-interactions
+   Smooth transitions, subtle motion, and feedback
+   ========================================================= */
+
+/* -------------------------
+   Keyframes
+   ------------------------- */
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade Out */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Pulse (Timer Active) */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(122, 162, 255, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(122, 162, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(122, 162, 255, 0);
+  }
+}
+
+/* Progress Ring Rotation (initial load) */
+@keyframes ringIntro {
+  from {
+    stroke-dashoffset: 628;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* -------------------------
+   Animation Utilities
+   ------------------------- */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.animate-pulse {
+  animation: pulseGlow 2s infinite;
+}
+
+/* -------------------------
+   Interactive Transitions
+   ------------------------- */
+
+/* Buttons */
+.primary-btn,
+.secondary-btn,
+.icon-button {
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.primary-btn:active,
+.secondary-btn:active,
+.icon-button:active {
+  transform: scale(0.98);
+}
+
+/* Session Tabs */
+.session-tab {
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+/* Settings Panel Slide */
+.settings-panel {
+  transition:
+    transform var(--transition-slow),
+    opacity var(--transition-base);
+}
+
+/* Hidden by default (off-canvas) */
+.settings-panel[aria-hidden="true"] {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Visible */
+.settings-panel[aria-hidden="false"] {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* -------------------------
+   Timer Specific
+   ------------------------- */
+.timer-section.active {
+  animation: fadeIn 0.6s ease;
+}
+
+/* Progress Ring Styling */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+.progress-ring-progress {
+  fill: transparent;
+  stroke: var(--color-accent);
+  stroke-linecap: round;
+  stroke-dasharray: 628;
+  stroke-dashoffset: 628;
+  transition: stroke-dashoffset 0.5s linear;
+}
+
+/* -------------------------
+   Accessibility: Reduced Motion
+   ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
