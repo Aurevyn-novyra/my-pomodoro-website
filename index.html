@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+       Premium Pomodoro Timer
+       Fully Client-Side | GitHub Pages Compatible
+       ========================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <meta name="description" content="A premium, distraction-free Pomodoro Timer with glassmorphism UI, focus sounds, and session stats." />
+
+  <title>FocusFlow — Pomodoro Timer</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/glass.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+
+<body>
+  <!-- =========================================================
+       App Shell
+       ========================================================= -->
+  <div id="app" class="app-container">
+    <!-- Header -->
+    <header class="app-header glass-card">
+      <h1 class="app-title">FocusFlow</h1>
+
+      <div class="header-actions">
+        <button id="fullscreenToggle" class="icon-button" aria-label="Toggle Fullscreen">
+          ⛶
+        </button>
+        <button id="settingsToggle" class="icon-button" aria-label="Open Settings">
+          ⚙
+        </button>
+      </div>
+    </header>
+
+    <!-- =======================================================
+         Main Timer Section
+         ======================================================= -->
+    <main class="main-content">
+      <section class="timer-section glass-card">
+        <!-- Session Type Tabs -->
+        <div class="session-tabs">
+          <button class="session-tab active" data-session="pomodoro">Focus</button>
+          <button class="session-tab" data-session="shortBreak">Short Break</button>
+          <button class="session-tab" data-session="longBreak">Long Break</button>
+        </div>
+
+        <!-- Countdown Display -->
+        <div class="timer-display">
+          <svg class="progress-ring" width="220" height="220">
+            <circle
+              class="progress-ring-bg"
+              stroke-width="8"
+              r="100"
+              cx="110"
+              cy="110"
+            />
+            <circle
+              class="progress-ring-progress"
+              stroke-width="8"
+              r="100"
+              cx="110"
+              cy="110"
+            />
+          </svg>
+
+          <div class="time-text">
+            <span id="minutes">25</span>:<span id="seconds">00</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="timer-controls">
+          <button id="startPauseBtn" class="primary-btn">
+            Start
+          </button>
+          <button id="resetBtn" class="secondary-btn">
+            Reset
+          </button>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           Stats Section
+           ======================================================= -->
+      <section class="stats-section glass-card">
+        <div class="stat-item">
+          <span class="stat-label">Today's Focus</span>
+          <span id="todayFocusTime" class="stat-value">0h 0m</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-label">Sessions Completed</span>
+          <span id="totalSessions" class="stat-value">0</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- =======================================================
+         Settings Drawer
+         ======================================================= -->
+    <aside id="settingsPanel" class="settings-panel glass-card" aria-hidden="true">
+      <h2 class="panel-title">Settings</h2>
+
+      <!-- Time Settings -->
+      <div class="setting-group">
+        <label for="pomodoroDuration">Pomodoro Duration (minutes)</label>
+        <input
+          type="number"
+          id="pomodoroDuration"
+          min="1"
+          max="420"
+          step="1"
+        />
+      </div>
+
+      <div class="setting-group">
+        <label for="shortBreakDuration">Short Break (minutes)</label>
+        <input
+          type="number"
+          id="shortBreakDuration"
+          min="1"
+          max="60"
+          step="1"
+        />
+      </div>
+
+      <div class="setting-group">
+        <label for="longBreakDuration">Long Break (minutes)</label>
+        <input
+          type="number"
+          id="longBreakDuration"
+          min="1"
+          max="120"
+          step="1"
+        />
+      </div>
+
+      <!-- Sound Settings -->
+      <div class="setting-group">
+        <label for="volumeControl">Volume</label>
+        <input
+          type="range"
+          id="volumeControl"
+          min="0"
+          max="1"
+          step="0.01"
+        />
+      </div>
+
+      <div class="setting-group inline">
+        <label for="muteToggle">Mute Sounds</label>
+        <input type="checkbox" id="muteToggle" />
+      </div>
+
+      <!-- Auto Mode -->
+      <div class="setting-group inline">
+        <label for="autoStartToggle">Auto Start Next Session</label>
+        <input type="checkbox" id="autoStartToggle" />
+      </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>© FocusFlow</span>
+    </footer>
+  </div>
+
+  <!-- =========================================================
+       Audio Assets
+       ========================================================= -->
+  <audio id="focusMusic" loop preload="auto">
+    <source src="assets/sounds/focus.mp3" type="audio/mpeg" />
+  </audio>
+
+  <audio id="alarmSound" preload="auto">
+    <source src="assets/sounds/alarm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- =========================================================
+       Application Scripts (Modular)
+       ========================================================= -->
+  <script src="js/storage.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/controls.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- =========================================================
+       Service Worker Registration
+       ========================================================= -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</body>
+</html>
